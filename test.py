@@ -58,3 +58,59 @@ class TestOyunAlani(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+
+
+
+import unittest
+from datetime import datetime
+from raporlama import generate_report, get_subscriber_changes, calculate_sales, list_programs
+
+class TestRaporlama(unittest.TestCase):
+    
+    def setUp(self):
+        # Örnek veri setleri
+        self.data = [
+            {"date": "2024-03-01", "event": "sale", "amount": 100},
+            {"date": "2024-03-02", "event": "sale", "amount": 150},
+            {"date": "2024-03-03", "event": "subscription", "status": "new"},
+            {"date": "2024-03-04", "event": "subscription", "status": "canceled"},
+        ]
+        
+        self.subscribers = [
+            {"name": "Ali", "status": "new"},
+            {"name": "Veli", "status": "canceled"},
+            {"name": "Ayşe", "status": "new"},
+        ]
+        
+        self.sales = [
+            {"date": "2024-03-01", "amount": 200},
+            {"date": "2024-03-02", "amount": 300},
+            {"date": "2024-03-03", "amount": 500},
+        ]
+        
+        self.programs = [
+            {"name": "Okul Gezisi", "date": "2024-04-10", "attendees": 30},
+            {"name": "Tiyatro", "date": "2024-04-12", "attendees": 50},
+        ]
+    
+    def test_generate_report(self):
+        result = generate_report(self.data, "2024-03-01", "2024-03-02")
+        self.assertEqual(len(result), 2)
+    
+    def test_get_subscriber_changes(self):
+        new_subs, canceled_subs = get_subscriber_changes(self.subscribers)
+        self.assertEqual(len(new_subs), 2)
+        self.assertEqual(len(canceled_subs), 1)
+    
+    def test_calculate_sales(self):
+        total_sales = calculate_sales(self.sales)
+        self.assertEqual(total_sales, 1000)
+    
+    def test_list_programs(self):
+        result = list_programs(self.programs, "2024-04-10", "2024-04-12")
+        self.assertEqual(len(result), 2)
+
+if __name__ == "__main__":
+    unittest.main()
