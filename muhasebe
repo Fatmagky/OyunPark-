@@ -1,0 +1,30 @@
+from typing import List, Dict
+
+def harcamaları_takip_et(harcamalar: List[Dict[str, float]]) -> float:
+    """
+    Harcama listesini alır ve toplam gideri hesaplar.
+
+    :param harcamalar: Harcama listesi (ör: [{ "kategori": "Kira", "miktar": 5000 }, ...])
+    :return: Toplam gider miktarı (float)
+    """
+    if not harcamalar:
+        return 0.0  # Eğer harcama listesi boşsa 0 döndür
+
+    toplam_harcama = sum(harcama.get("miktar", 0) for harcama in harcamalar)
+    return toplam_harcama
+
+
+def kar_zarar_raporu(satislar: List[Dict[str, float]], harcamalar: List[Dict[str, float]]) -> float:
+    """
+    Satış gelirleri ve giderleri hesaplayarak kar/zarar durumunu raporlar.
+
+    :param satislar: Satış listesi (ör: [{ "tarih": "2024-03-01", "miktar": 200 }, ...])
+    :param harcamalar: Harcama listesi (ör: [{ "kategori": "Elektrik", "miktar": 100 }, ...])
+    :return: Kar veya zarar miktarı (float). Pozitifse kar, negatifse zarar.
+    """
+    toplam_satis = sum(satis.get("miktar", 0) for satis in satislar)
+    toplam_harcama = harcamaları_takip_et(harcamalar)
+    
+    kar_zarar = toplam_satis - toplam_harcama
+    return kar_zarar
+
