@@ -1,0 +1,52 @@
+#  Abonman Girişi (Metod)
+def abonman_giris(kart_numarasi, kart_turu):
+    if kart_turu == 'abonman':
+        print(f"Abonman kartı ile giriş yapıldı: {kart_numarasi}")
+        return True
+    else:
+        print("Geçersiz kart türü.")
+        return False
+    # Nakit Giriş (Metod)
+
+def nakit_giris(tutar):
+    if tutar >= 10:  # Örnek tutar
+        print(f"Nakit ile giriş yapıldı. Ödenen miktar: {tutar}")
+        return True
+    else:
+        print("Yetersiz bakiye.")
+        return False
+    #  Kart ile Gün Boyu Oyun (Metod)
+
+def kartla_gunboyu_oyun(kart_numarasi, kart_turu):
+    if kart_turu == 'kart' and valid_kart(kart_numarasi):  # valid_kart fonksiyonu kartın geçerliliğini kontrol eder.
+        print(f"{kart_numarasi} kartı ile gün boyu oyun erişimi sağlandı.")
+        return True
+    else:
+        print("Geçersiz kart veya kart süresi dolmuş.")
+        return False
+    #  Okul ve Kuruluş Girişi (Metod)
+
+def okul_kurulus_giris(kart_numarasi, kurum_turu):
+    if kurum_turu == 'okul' or kurum_turu == 'kurulus':
+        print(f"{kurum_turu} kartı ile giriş sağlandı.")
+        return True
+    else:
+        print("Geçersiz kurum kartı.")
+        return False
+    # QR Kart ile Doğrulama (Metod)
+
+def qr_kart_dogrulama(qr_kodu):
+    if qr_kodu == "gecerliQR":
+        print("QR kodu doğrulandı. Giriş yapılabilir.")
+        return True
+    else:
+        print("Geçersiz QR kodu.")
+        return False
+    #  Kart Süresi Hatırlatma (Metod)
+def kart_suresi_hatirlatma(kart_numarasi, bitis_tarihi):
+    from datetime import datetime
+    current_date = datetime.now()
+    if current_date > bitis_tarihi:
+        print(f"{kart_numarasi} kartının süresi dolmuş.")
+    else:
+        print(f"{kart_numarasi} kartının süresi {bitis_tarihi} tarihine kadar geçerli.")
